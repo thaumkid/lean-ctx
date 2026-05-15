@@ -1,4 +1,5 @@
 use crate::core::cache::SessionCache;
+use crate::core::config;
 use crate::core::task_relevance::{compute_relevance, parse_task_hints};
 use crate::core::tokens::count_tokens;
 use crate::tools::CrpMode;
@@ -208,10 +209,13 @@ pub fn handle(
     }
     append_graph_hotspots_section(&mut output, &index.project_root, &index);
 
-    let wakeup = build_wakeup_briefing(&project_root, task);
-    if !wakeup.is_empty() {
-        output.push(String::new());
-        output.push(wakeup);
+    let cfg = config::Config::load();
+    if cfg.enable_wakeup_ctx {
+        let wakeup = build_wakeup_briefing(&project_root, task);
+        if !wakeup.is_empty() {
+            output.push(String::new());
+            output.push(wakeup);
+        }
     }
 
     if !auto_loaded.is_empty() {

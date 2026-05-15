@@ -148,6 +148,14 @@ impl ConfigSchema {
             ),
         );
         root.insert(
+            "enable_wakeup_ctx".into(),
+            key(
+                "bool",
+                serde_json::json!(cfg.enable_wakeup_ctx),
+                "Whether to add the wake-up context briefing in a new or stale session",
+            ),
+        );
+        root.insert(
             "redirect_exclude".into(),
             key(
                 "string[]",

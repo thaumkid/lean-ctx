@@ -255,6 +255,9 @@ pub struct Config {
     pub proxy: ProxyConfig,
     #[serde(default = "serde_defaults::default_buddy_enabled")]
     pub buddy_enabled: bool,
+    /// Whether to add the wake-up context briefing in a new or stale session -- if the agent is configured to bypass the MCP server and call lean-ctx commands in an unwrapped bash shell, lean-ctx will mistakenly consider every command to be part of a new session and flood the agent context with wake-up notes
+    #[serde(default)]
+    pub enable_wakeup_ctx: bool,
     #[serde(default)]
     pub redirect_exclude: Vec<String>,
     /// Tools to exclude from the MCP tool list returned by list_tools.
@@ -556,6 +559,7 @@ impl Default for Config {
             autonomy: AutonomyConfig::default(),
             proxy: ProxyConfig::default(),
             buddy_enabled: serde_defaults::default_buddy_enabled(),
+            enable_wakeup_ctx: true,
             redirect_exclude: Vec::new(),
             disabled_tools: Vec::new(),
             loop_detection: LoopDetectionConfig::default(),

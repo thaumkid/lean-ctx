@@ -12,7 +12,7 @@
 
 set -eu
 
-REPO="yvgude/lean-ctx"
+REPO="thaumkid/lean-ctx"
 INSTALL_DIR="${LEAN_CTX_INSTALL_DIR:-$HOME/.local/bin}"
 # Resolve the script's directory when invoked as a file. When piped via
 # `curl ... | sh`, $0 is "sh" (or similar) — the [ -f "$0" ] guard then
